@@ -57,6 +57,7 @@ class Form extends React.Component {
   handleValidate = (e) => {
     const error = this.state.errors;
     if (e.target.value) error[e.target.name] = '';
+    if (e.target.value.indexOf(' ') >= 0) error[e.target.name] = ''
 
     this.setState({
       errors: error
@@ -69,7 +70,7 @@ class Form extends React.Component {
     let errors = {};
     let formIsValid = true;
 
-    if (!fields['title']) {
+    if (!fields['title'] || fields['title'].indexOf(' ') >= 0) {
       formIsValid = false;
       errors['title'] = '* Напиши заголовок.';
     }
@@ -98,7 +99,7 @@ class Form extends React.Component {
     const titleError = this.state.errors.title
     const bodyError = this.state.errors.body
     const tagsError = this.state.errors.tags
-    
+
     return (
       <form id="post-add" className="col-lg-4" onSubmit={this.handleSubmit}>
         <div className="form-group">
@@ -110,7 +111,7 @@ class Form extends React.Component {
             onChange={this.handleChange}
             value={this.state.fields.title}
           />
-          {titleError ? <div className="errorMsg">{titleError}</div> : null}
+          {titleError && <div className="errorMsg">{titleError}</div>}
         </div>
         <div className="form-group">
           <input
@@ -121,7 +122,7 @@ class Form extends React.Component {
             onChange={this.handleChange}
             value={this.state.fields.body}
           />
-          {bodyError ? <div className="errorMsg">{bodyError}</div> : null}
+          {bodyError && <div className="errorMsg">{bodyError}</div>}
         </div>
         <div className="form-group">
           <input 
@@ -132,7 +133,7 @@ class Form extends React.Component {
             onChange={this.handleChange}
             value={this.state.fields.tags}
           />
-          {tagsError ? <div className="errorMsg">{tagsError}</div> : null}
+          {tagsError && <div className="errorMsg">{tagsError}</div>}
           </div>
         <button type="submit" className="btn btn-primary">Submit</button>
       </form>

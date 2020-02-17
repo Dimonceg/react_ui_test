@@ -68,7 +68,7 @@ class Form extends React.Component {
     let errors = {};
     let formIsValid = true;
 
-    if (!fields['title'] || fields['title'].indexOf(' ') >= 0) {
+    if (!fields['title']) {
       formIsValid = false;
       errors['title'] = '* Напиши заголовок.';
     }

@@ -57,7 +57,6 @@ class Form extends React.Component {
   handleValidate = (e) => {
     const error = this.state.errors;
     if (e.target.value) error[e.target.name] = '';
-    if (e.target.value.indexOf(' ') >= 0) error[e.target.name] = ''
 
     this.setState({
       errors: error
@@ -65,7 +64,6 @@ class Form extends React.Component {
   }
 
   validateForm = () => {
-
     let fields = this.state.fields;
     let errors = {};
     let formIsValid = true;
